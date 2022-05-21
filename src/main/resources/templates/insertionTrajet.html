@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Checkout example · Bootstrap</title>
+
+    <link rel="canonical" href="../../examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+<link href="../../dist/css/bootstrap.min.css" rel="stylesheet" >
+
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="../../assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="../../assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../../assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="../../assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="../../assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+<link rel="icon" href="../../assets/img/favicons/favicon.ico">
+<meta name="msapplication-config" content="../../assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    <div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" th:src="@{img/chauffeur.png}" alt="" width="72" height="72">
+   
+    <h1>Ajouter un trajet</h1>    <h1><a th:href="liste_vehicule_dispo">Liste des vehicules disponible</a></h1>
+      </div>
+  <form th:action="@{/insertTrajet}" method="post">
+  <div class="row">
+ 
+    <div class="col-md-6 order-md-2 mb-4">
+      <h4 class="mb-3">ARRIVEE</h4>
+    
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Date d'arrivee</label>
+            <input type="date" name="date_arrivee" class="form-control" id="firstName" placeholder="" value="" required>
+            
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Heure d'arrivee</label>
+            <input type="time" name="heure_arrivee" class="form-control" id="lastName" placeholder="" value="" required>
+            
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="username">Lieu d'arrivee</label>
+          <div class="input-group">
+           
+             <input type="text" name="lieu_arrivee" class="form-control" id="lastName" placeholder="Lieu" value="" required>
+            <div class="invalid-feedback" style="width: 100%;">
+              Your username is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Kilometrage</label>
+          <input type="number" name="kilometrage_arrivee" min="0" class="form-control" id="email" placeholder=" ">
+          <div class="invalid-feedback">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div> 
+    </div> 
+    <div class="col-md-6 order-md-1">
+      <h4 class="mb-3">DEPART</h4> 
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Date de depart</label>
+            <input type="date" name="date_depart" class="form-control" id="firstName" placeholder="" value="" required>
+            
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Heure de depart</label>
+            <input type="time" name="heure_depart" class="form-control" id="lastName" placeholder="" value="" required>
+            
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="username">Lieu de depart</label>
+          <div class="input-group">
+           
+             <input type="text" name="lieu_depart"  class="form-control" id="lastName" placeholder="Lieu" value="" required>
+            <div class="invalid-feedback" style="width: 100%;">
+              Your username is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Kilometrage</label>
+          <input type="number" name="kilometrage_depart" min="0" class="form-control" id="email" placeholder=" ">
+          <div class="invalid-feedback">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div>
+ 
+       
+      
+    </div>
+  </div>
+  <dv class="row">
+    
+   		  <div class="input-group">
+          
+             <input type="text" class="form-control" name="motif"   placeholder="Motif" value="" required>
+             
+          </div>  
+           <div class="input-group">
+          
+             <input type="number" name="quantite" class="form-control"   placeholder="Quantite carburant" value="" required>
+             
+          </div> 
+          
+                   <select name="chauffeur" class="custom-select d-block w-100">
+                            <option th:each="chauffeur : ${listChauffeur}"  th:value="${chauffeur.id_chauffeur}" th:utext="${chauffeur.nom_chauffeur}"> </option>
+                   </select> 
+          
+          
+                   <select name="vehicule" class="custom-select d-block w-100">
+                            <option th:each="vehicule : ${listVehicule}"  th:value="${vehicule.id_vehicule}" th:utext="${vehicule.modele}"> </option>
+                   </select> 
+          
+          
+   <button class="btn btn-primary btn-lg btn-block" type="submit">VALIDER</button>
+  </div>
+  </form>
+
+  
+</div>
+<script src="../../assets/js/vendor/jquery.slim.min.js" ></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../../dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+        <script src="form-validation.js"></script></body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Signin Template · Bootstrap</title>
+
+    <link rel="canonical" href="../../examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet" >
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="../../assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="../../assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../../assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="../../assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="../../assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="../../assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-4">
+            <form th:action="@{/insertVehicule}" method="post">
+
+                <h1 style="margin-left: 60px;"class="h3 mb-3 fw-normal">Ajouter un vehicule</h1>
+                 <div class="form-floating">
+                    <input type="text" name="numero" class="form-control"   placeholder="Numero" required>
+                </div>
+                <div class="form-floating">
+                 <label>Choisir voiture</label>
+                   <select name="marque" class="custom-select d-block w-100">
+                            <option th:each="marque : ${listMarque}"  th:value="${marque.id_marque}" th:utext="${marque.nom_marque}"> </option>
+                   </select>
+
+                </div>
+                 <div class="form-floating">
+                	
+                    <input type="text" name="modele" class="form-control"   placeholder="Modele" required>
+                </div>
+                <div class="form-floating">
+                 <label>Choisir type</label>
+                   <select name="type_vehicule" class="custom-select d-block w-100">
+                            <option th:each="type_vehicule : ${listType_vehicule}"  th:value="${type_vehicule.id_type_vehicule}" th:utext="${type_vehicule.nom_type_vehicule}"> </option>
+                   </select>
+
+                </div>
+                <button    class="w-100 btn btn-lg btn-primary" type="submit">AJOUTER</button>
+
+            </form>
+
+        </div>
+        
+        <div class="col-md-8">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" >Vehicule</th>
+                    <th scope="col"> Numero</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Kilometrage</th>
+                </tr>
+                </thead>
+                <tbody>
+                   <tr th:each="list : ${listVehicule}">
+                    <th scope="col" th:utext="| ${list.marq.nom_marque} ${list.numero} |"></th>
+                    <th scope="col" th:utext="${list.numero} "> </th>
+                    <th scope="col" th:utext="${list.typvehicule.nom_type_vehicule}"> </th>
+                    <th scope="col" th:utext="${list.kilometrage} "> </th>
+                    <th scope="col" ><img  width="70" height="60" th:src="|@{assets/img/logo_voiture/}${list.marq.image} |"></th>
+					<th scope="col"><a th:href="@{export(vehicule=${list.id_vehicule})}">Liste trajet(PDF)</a></th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
